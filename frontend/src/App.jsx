@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import "./i18n"; // Import i18n configuration
+
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
@@ -8,6 +10,7 @@ import History from "./pages/History";
 import Profile from "./pages/Profile";
 import Leaderboard from "./pages/Leaderboard";
 import ChartAnalysis from "./pages/ChartAnalysis";
+import Settings from "./pages/Settings";
 
 function App() {
   return (
@@ -22,6 +25,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/charts" element={<ChartAnalysis />} />
+        <Route path="/settings" element={<Settings />} />
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </BrowserRouter>

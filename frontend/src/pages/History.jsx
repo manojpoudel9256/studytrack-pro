@@ -4,8 +4,10 @@ import { motion } from "framer-motion";
 import { getRecords, deleteRecord } from "../api/api";
 import Layout from "../components/Layout";
 import { Clock, Calendar, Trash2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 function History() {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [records, setRecords] = useState([]);
 
@@ -28,7 +30,7 @@ function History() {
     }, [navigate]);
 
     const handleDelete = async (id) => {
-        if (!confirm("Are you sure you want to delete this record?")) return;
+        if (!confirm(t('common.deleteConfirm', "Are you sure you want to delete this record?"))) return;
         try {
             await deleteRecord(id);
             loadRecords();
@@ -42,18 +44,18 @@ function History() {
             <div className="space-y-6">
                 <div className="flex justify-between items-center">
                     <div>
-                        <h1 className="text-2xl font-bold text-gray-900">Study History</h1>
-                        <p className="text-gray-500">A complete log of all your learning sessions.</p>
+                        <h1 className="text-2xl font-bold text-gray-900">{t('history.title', 'Study History')}</h1>
+                        <p className="text-gray-500">{t('history.description', 'A complete log of all your learning sessions.')}</p>
                     </div>
                     <span className="bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-sm font-medium">
-                        {records.length} Records
+                        {t('history.recordsCount', { count: records.length, defaultValue: '{{count}} Records' })}
                     </span>
                 </div>
 
                 <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                     {records.length === 0 ? (
                         <div className="p-12 text-center text-gray-500">
-                            No records found.
+                            {t('history.noRecords', 'No records found.')}
                         </div>
                     ) : (
                         <div className="divide-y divide-gray-100">
@@ -88,7 +90,7 @@ function History() {
                                         <button
                                             onClick={() => handleDelete(r.id)}
                                             className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-full transition-all"
-                                            title="Delete Record"
+                                            title={t('common.delete', 'Delete')}
                                         >
                                             <Trash2 className="w-4 h-4" />
                                         </button>

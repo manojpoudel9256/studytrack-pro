@@ -2,8 +2,10 @@
 
 StudyTrack Pro is a modern, full-stack web application designed to help students and professionals track their study hours, analyze their productivity, and stay motivated through gamification.
 
-![Dashboard Preview](screenshots/screenshot.png)
-*(See `screenshots/screenshot.png` for the preview!)*
+![Dashboard Preview](screenshots/screenshot_eng.png)
+*(See `screenshots/screenshot_eng.png` for the preview!)*
+
+> [**🇺🇸 English Version**](README.md) | [**🇯🇵 日本語版 (Japanese Version)**](README_ja.md)
 
 ---
 
@@ -28,11 +30,26 @@ StudyTrack Pro is a modern, full-stack web application designed to help students
 - **Custom Avatar**: Upload your own profile picture (supports crop & resize).
 - **Edit Details**: Easily update your name, email, and password.
 
+### 🌐 Internationalization (i18n)
+- **Multi-language Support**: Fully localized in **English** and **Japanese**.
+- **Integrated Toggle**: Seamlessly switch languages from the Login/Register screens.
+- **Persistent Choice**: Remembers your language preference automatically.
+
+### ✨ "Golden Light" Theme & UI
+- **Premium Aesthetic**: A warm, prestigious **Golden/Amber** theme with a soft cream background.
+- **Live Backgrounds**: Login & Register pages feature a **dynamic, moving gradient** with floating geometric particles.
+- **Modern Interactions**: Buttons feature a stylish **Blue-Purple** gradient for high contrast and modern feel.
+
+### 💬 Motivational Quotes
+- **Daily Inspiration**: Displays a new motivational quote on the Dashboard.
+- **Hybrid System**: Fetches from a live API (English) or uses a curated offline library (Japanese).
+
 ---
 
 ## 🛠️ Technology Stack
 
-- **Frontend**: React.js (Vite), Tailwind CSS, Framer Motion (Animations), Recharts (Charts), Lucide React (Icons).
+- **Frontend**: React.js (Vite), Tailwind CSS v4, Framer Motion (Animations), Recharts (Charts), Lucide React (Icons).
+- **Internationalization**: i18next, react-i18next, i18next-browser-languagedetector.
 - **Backend**: Node.js, Express.js.
 - **Database**: MySQL.
 - **Authentication**: JWT (JSON Web Tokens), BCrypt (Password Hashing).

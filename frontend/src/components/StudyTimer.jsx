@@ -3,8 +3,10 @@ import { Play, Pause, StopCircle, Award, Timer, Tag, Type } from "lucide-react";
 import Button from "./Button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTimer } from "../context/TimerContext";
+import { useTranslation } from "react-i18next";
 
 const StudyTimer = ({ onSave }) => {
+    const { t } = useTranslation();
     const {
         isActive,
         isFocusMode,
@@ -38,7 +40,7 @@ const StudyTimer = ({ onSave }) => {
 
     const handleStart = () => {
         if (!subject.trim()) {
-            alert("Please enter a subject to focus on.");
+            alert(t('timer.enterSubject', "Please enter a subject to focus on."));
             return;
         }
         startSession(subject, category);
@@ -46,7 +48,7 @@ const StudyTimer = ({ onSave }) => {
 
     const handleStop = () => {
         if (displaySeconds < 60) {
-            if (confirm("Session less than 1 minute. Discard?")) {
+            if (confirm(t('timer.discardConfirm', "Session less than 1 minute. Discard?"))) {
                 resetSession();
             }
             return;
@@ -72,8 +74,8 @@ const StudyTimer = ({ onSave }) => {
                     <Award className="w-12 h-12 text-yellow-300" />
                 </div>
                 <div>
-                    <h3 className="text-2xl font-bold tracking-tight">Session Complete!</h3>
-                    <p className="text-indigo-100 font-medium">Excellent Focus.</p>
+                    <h3 className="text-2xl font-bold tracking-tight">{t('timer.complete', 'Session Complete!')}</h3>
+                    <p className="text-indigo-100 font-medium">{t('timer.excellent', 'Excellent Focus.')}</p>
                 </div>
                 <div className="text-5xl font-black text-yellow-300 tracking-tighter drop-shadow-sm">
                     +{xpEarned} <span className="text-2xl font-bold text-yellow-200/80">XP</span>
@@ -115,6 +117,8 @@ const StudyTimer = ({ onSave }) => {
                     {/* Controls */}
                     <div className="flex items-center gap-6">
                         <button
+                            onClick={isActive ? pauseSession : resumeSession}
+                            className="bg-gradient-to-br from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg shadow-purple-500/30 transition-all hover:scale-105 active:scale-95 border-0"
                         >
                             {isActive ? <Pause className="w-8 h-8 fill-current" /> : <Play className="w-8 h-8 fill-current" />}
                         </button>
@@ -122,7 +126,7 @@ const StudyTimer = ({ onSave }) => {
                         <button
                             onClick={handleStop}
                             className="group flex items-center justify-center w-12 h-12 rounded-full bg-slate-800 hover:bg-red-500/20 text-slate-400 hover:text-red-500 border border-slate-700 hover:border-red-500/50 transition-all"
-                            title="End Session"
+                            title={t('timer.end', "End Session")}
                         >
                             <StopCircle className="w-5 h-5" />
                         </button>
@@ -141,18 +145,18 @@ const StudyTimer = ({ onSave }) => {
 
             <div className="relative z-10 flex flex-col h-full">
                 <div className="mb-8">
-                    <h3 className="text-2xl font-bold text-gray-900 tracking-tight">Ready to Focus?</h3>
-                    <p className="text-gray-500">Track your time and earn XP.</p>
+                    <h3 className="text-2xl font-bold text-gray-900 tracking-tight">{t('timer.ready', "Ready to Focus?")}</h3>
+                    <p className="text-gray-500">{t('timer.track', "Track your time and earn XP.")}</p>
                 </div>
 
                 <div className="flex-1 space-y-5">
                     <div className="group/input">
                         <label className="flex items-center gap-2 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 group-focus-within/input:text-indigo-600 transition-colors">
-                            <Type className="w-4 h-4" /> Subject
+                            <Type className="w-4 h-4" /> {t('timer.subject', "Subject")}
                         </label>
                         <input
                             className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-gray-900 font-medium placeholder-gray-400 focus:ring-2 focus:ring-indigo-100 transition-all hover:bg-gray-100"
-                            placeholder="What are you working on?"
+                            placeholder={t('timer.subjectPlaceholder', "What are you working on?")}
                             value={subject}
                             onChange={(e) => setSubject(e.target.value)}
                         />
@@ -160,7 +164,7 @@ const StudyTimer = ({ onSave }) => {
 
                     <div className="group/input">
                         <label className="flex items-center gap-2 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 group-focus-within/input:text-indigo-600 transition-colors">
-                            <Tag className="w-4 h-4" /> Category
+                            <Tag className="w-4 h-4" /> {t('timer.category', "Category")}
                         </label>
                         <div className="grid grid-cols-3 gap-2">
                             {["General", "Coding", "Math", "Reading", "Science", "Writing"].map((cat) => (
@@ -168,11 +172,11 @@ const StudyTimer = ({ onSave }) => {
                                     key={cat}
                                     onClick={() => setCategory(cat)}
                                     className={`text-sm px-3 py-2 rounded-lg border transition-all ${category === cat
-                                        ? 'bg-indigo-600 text-white border-indigo-600 shadow-md shadow-indigo-200'
+                                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white border-transparent shadow-md shadow-purple-200'
                                         : 'bg-white border-gray-200 text-gray-600 hover:border-indigo-200 hover:bg-gray-50'
                                         }`}
                                 >
-                                    {cat}
+                                    {t(`timer.categories.${cat}`, cat)}
                                 </button>
                             ))}
                         </div>
@@ -184,7 +188,7 @@ const StudyTimer = ({ onSave }) => {
                     className="w-full justify-center py-4 mt-6 text-lg font-semibold shadow-xl shadow-indigo-200 hover:shadow-indigo-300 hover:-translate-y-0.5 transition-all"
                 >
                     <Play className="w-5 h-5 mr-2 fill-current" />
-                    Start Session
+                    {t('timer.start', "Start Session")}
                 </Button>
             </div>
         </div>

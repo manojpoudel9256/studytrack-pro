@@ -5,8 +5,10 @@ import ActivitiesChart from "../components/ActivitiesChart";
 import CategoryChart from "../components/CategoryChart";
 import Layout from "../components/Layout";
 import { BarChart2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 function ChartAnalysis() {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [records, setRecords] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -75,18 +77,18 @@ function ChartAnalysis() {
                 <div>
                     <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
                         <BarChart2 className="w-8 h-8 text-indigo-600" />
-                        Chart Analysis
+                        {t('charts.title', 'Chart Analysis')}
                     </h1>
-                    <p className="text-gray-500">Deep dive into your study patterns.</p>
+                    <p className="text-gray-500">{t('charts.description', 'Deep dive into your study patterns.')}</p>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div className="space-y-4">
-                        <h2 className="text-lg font-semibold text-gray-700">Weekly Activity</h2>
+                        <h2 className="text-lg font-semibold text-gray-700">{t('charts.weeklyActivity', 'Weekly Activity')}</h2>
                         <ActivitiesChart data={stats.weeklyData} />
                     </div>
                     <div className="space-y-4">
-                        <h2 className="text-lg font-semibold text-gray-700">Subject Distribution</h2>
+                        <h2 className="text-lg font-semibold text-gray-700">{t('charts.subjectDistribution', 'Subject Distribution')}</h2>
                         <CategoryChart data={stats.categoryData} />
                     </div>
                 </div>

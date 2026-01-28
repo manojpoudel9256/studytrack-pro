@@ -4,8 +4,10 @@ import { getLeaderboard } from "../api/api";
 import Layout from "../components/Layout";
 import { Trophy, Medal, Crown, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 function Leaderboard() {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -60,15 +62,15 @@ function Leaderboard() {
                 <div className="text-center">
                     <h1 className="text-2xl font-bold text-gray-900 flex items-center justify-center gap-2">
                         <Trophy className="w-8 h-8 text-yellow-500" />
-                        Leaderboard
+                        {t('leaderboard.title', 'Leaderboard')}
                     </h1>
-                    <p className="text-gray-500">Top students dedicated to learning.</p>
+                    <p className="text-gray-500">{t('leaderboard.description', 'Top students dedicated to learning.')}</p>
                 </div>
 
                 <div className="space-y-3">
                     {users.length === 0 ? (
                         <div className="text-center py-10 text-gray-500 bg-white rounded-lg border border-gray-200">
-                            No records yet. Be the first!
+                            {t('leaderboard.noRecords', 'No records yet. Be the first!')}
                         </div>
                     ) : (
                         users.map((user, index) => (
@@ -104,7 +106,7 @@ function Leaderboard() {
                                         {user.total_xp || 0} XP
                                     </span>
                                     <span className="text-xs text-gray-400">
-                                        Total Score
+                                        {t('leaderboard.totalScore', 'Total Score')}
                                     </span>
                                 </div>
                             </div>

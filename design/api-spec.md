@@ -142,4 +142,12 @@ Authorization: Bearer JWT_TOKEN
 }
 ```
 
+## External APIs (Frontend)
+
+### 1. ZenQuotes API (Motivational Quotes)
+- **Endpoint**: `https://zenquotes.io/api/random` (or proxied)
+- **Method**: GET
+- **Description**: Fetches random inspirational quotes for the Dashboard (English).
+- **Fallback**: Uses local `quotes.json` if API fails or for Japanese support.
+
 

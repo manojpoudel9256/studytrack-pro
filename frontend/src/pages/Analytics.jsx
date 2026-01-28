@@ -4,8 +4,10 @@ import { getRecords, createRecord } from "../api/api";
 import StudyTimer from "../components/StudyTimer";
 import Layout from "../components/Layout";
 import { Target } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 function Analytics() {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [records, setRecords] = useState([]);
 
@@ -45,9 +47,9 @@ function Analytics() {
                 <div>
                     <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
                         <Target className="w-8 h-8 text-indigo-600" />
-                        Focus Session
+                        {t('analytics.title', 'Focus Session')}
                     </h1>
-                    <p className="text-gray-500">Eliminate distractions and track your study time.</p>
+                    <p className="text-gray-500">{t('analytics.description', 'Eliminate distractions and track your study time.')}</p>
                 </div>
 
                 <div className="w-full">

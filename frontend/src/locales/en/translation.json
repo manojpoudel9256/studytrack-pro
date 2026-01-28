@@ -1,0 +1,139 @@
+{
+    "common": {
+        "dashboard": "Dashboard",
+        "settings": "Settings",
+        "profile": "Profile",
+        "logout": "Logout",
+        "loading": "Loading...",
+        "save": "Save",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "edit": "Edit",
+        "language": "Language",
+        "english": "English",
+        "japanese": "Japanese",
+        "deleteConfirm": "Are you sure you want to delete this record?"
+    },
+    "dashboard": {
+        "title": "Dashboard",
+        "welcome": "Welcome back! Here's your study overview.",
+        "totalHours": "Total Study Hours",
+        "activeDays": "Active Days",
+        "focusGoal": "Focus Goal",
+        "currentLevel": "Current Level",
+        "recentActivity": "Recent Activity",
+        "noRecords": "No records found. Start your first session!",
+        "lifetime": "Lifetime",
+        "totalDaysStudied": "Total days studied",
+        "dailyCompletion": "Daily completion",
+        "top10": "Top 10%",
+        "last5Records": "Last 5 records"
+    },
+    "sidebar": {
+        "dashboard": "Dashboard",
+        "focusTimer": "Focus Timer",
+        "addSession": "Add Session",
+        "history": "History",
+        "chartAnalysis": "Chart Analysis",
+        "leaderboard": "Leaderboard",
+        "profile": "Profile",
+        "settings": "Settings"
+    },
+    "languageSelection": {
+        "title": "Select Language",
+        "description": "Please choose your preferred language to continue.",
+        "continue": "Continue"
+    },
+    "analytics": {
+        "title": "Focus Session",
+        "description": "Eliminate distractions and track your study time."
+    },
+    "addRecord": {
+        "title": "Add New Record",
+        "description": "Manually log a study session to your history.",
+        "sessionDetails": "Session Details",
+        "subject": "Subject",
+        "subjectPlaceholder": "What did you study?",
+        "category": "Category",
+        "categoryPlaceholder": "Topic (e.g. Math, Coding)",
+        "duration": "Duration (Minutes)",
+        "durationPlaceholder": "60",
+        "date": "Date",
+        "save": "Save Record",
+        "saving": "Saving..."
+    },
+    "history": {
+        "title": "Study History",
+        "description": "A complete log of all your learning sessions.",
+        "recordsCount": "{{count}} Records",
+        "noRecords": "No records found."
+    },
+    "charts": {
+        "title": "Chart Analysis",
+        "description": "Deep dive into your study patterns.",
+        "weeklyActivity": "Weekly Activity",
+        "subjectDistribution": "Subject Distribution"
+    },
+    "leaderboard": {
+        "title": "Leaderboard",
+        "description": "Top students dedicated to learning.",
+        "noRecords": "No records yet. Be the first!",
+        "totalScore": "Total Score"
+    },
+    "profile": {
+        "title": "My Profile",
+        "editProfile": "Edit Profile",
+        "plan": "Student • Free Plan",
+        "email": "Email",
+        "joined": "Joined",
+        "fullName": "Full Name",
+        "emailAddress": "Email Address",
+        "newPassword": "New Password (Optional)",
+        "passwordPlaceholder": "Leave blank to keep current",
+        "passwordHelp": "Only enter a password if you want to change it.",
+        "saveChanges": "Save Changes"
+    },
+    "timer": {
+        "enterSubject": "Please enter a subject to focus on.",
+        "discardConfirm": "Session less than 1 minute. Discard?",
+        "complete": "Session Complete!",
+        "excellent": "Excellent Focus.",
+        "ready": "Ready to Focus?",
+        "track": "Track your time and earn XP.",
+        "subject": "Subject",
+        "subjectPlaceholder": "What are you working on?",
+        "category": "Category",
+        "start": "Start Session",
+        "end": "End Session",
+        "categories": {
+            "General": "General",
+            "Coding": "Coding",
+            "Math": "Math",
+            "Reading": "Reading",
+            "Science": "Science",
+            "Writing": "Writing"
+        }
+    },
+    "auth": {
+        "loginTitle": "Sign in to your account",
+        "loginSubtitle": "Welcome back to StudyTrack Pro",
+        "registerTitle": "Create your account",
+        "registerSubtitle": "sign in to your account",
+        "or": "Or",
+        "noAccount": "Don't have an account?",
+        "registerHere": "Register here",
+        "email": "Email address",
+        "emailPlaceholder": "Enter your email",
+        "password": "Password",
+        "passwordPlaceholder": "Enter your password",
+        "passwordPlaceholderConfirm": "••••••••",
+        "fullName": "Full Name",
+        "fullNamePlaceholder": "John Doe",
+        "profilePicture": "Profile Picture (Optional)",
+        "uploadFile": "Upload a file",
+        "fileHelp": "PNG, JPG, GIF up to 5MB",
+        "signIn": "Sign in",
+        "signingIn": "Signing in...",
+        "createAccount": "Create Account"
+    }
+}

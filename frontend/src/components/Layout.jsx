@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { getUserProfile } from "../api/api";
 import { motion, AnimatePresence } from "framer-motion";
-import { BookOpen, LayoutDashboard, LogOut, Menu, User, X, Clock, Plus, Trophy, BarChart2, Target } from "lucide-react";
+import { BookOpen, LayoutDashboard, LogOut, Menu, User, X, Clock, Plus, Trophy, BarChart2, Target, Settings } from "lucide-react";
 import Button from "./Button";
+import { useTranslation } from "react-i18next";
 
 const SidebarLink = ({ to, icon: Icon, label, active, onClick }) => (
     <Link
@@ -20,6 +21,7 @@ const SidebarLink = ({ to, icon: Icon, label, active, onClick }) => (
 );
 
 const Layout = ({ children }) => {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const location = useLocation();
     const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -41,24 +43,30 @@ const Layout = ({ children }) => {
     };
 
     const navItems = [
-        { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-        { path: "/analytics", label: "Focus Timer", icon: Target },
-        { path: "/add-record", label: "Add Session", icon: Plus },
-        { path: "/history", label: "History", icon: Clock },
-        { path: "/charts", label: "Chart Analysis", icon: BarChart2 },
-        { path: "/leaderboard", label: "Leaderboard", icon: Trophy },
-        { path: "/profile", label: "Profile", icon: User },
+        { path: "/dashboard", label: t('sidebar.dashboard', "Dashboard"), icon: LayoutDashboard },
+        { path: "/analytics", label: t('sidebar.focusTimer', "Focus Timer"), icon: Target },
+        { path: "/add-record", label: t('sidebar.addSession', "Add Session"), icon: Plus },
+        { path: "/history", label: t('sidebar.history', "History"), icon: Clock },
+        { path: "/charts", label: t('sidebar.chartAnalysis', "Chart Analysis"), icon: BarChart2 },
+        { path: "/leaderboard", label: t('sidebar.leaderboard', "Leaderboard"), icon: Trophy },
+        { path: "/profile", label: t('sidebar.profile', "Profile"), icon: User },
+        { path: "/settings", label: t('sidebar.settings', "Settings"), icon: Settings },
     ];
 
     return (
         <div className="min-h-screen bg-gray-50 flex">
             {/* Desktop Sidebar */}
             <aside className="hidden md:flex flex-col w-64 bg-white border-r border-gray-200 h-screen sticky top-0">
-                <div className="p-6 flex items-center gap-2 border-b border-gray-100">
-                    <div className="p-2 bg-indigo-600 rounded-lg shadow-lg shadow-indigo-200">
-                        <BookOpen className="w-5 h-5 text-white" />
+                <div className="flex items-center gap-3 px-2">
+                    <div className="p-2 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-xl shadow-lg ring-1 ring-white/50 border border-indigo-200">
+                        <BookOpen className="w-8 h-8 text-white" />
                     </div>
-                    <span className="text-xl font-bold text-gray-900 tracking-tight">StudyTrack</span>
+                    <div>
+                        <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-700 to-indigo-500">
+                            StudyTrack
+                        </h1>
+                        <p className="text-xs font-medium text-indigo-600 tracking-wider uppercase">Golden Edition</p>
+                    </div>
                 </div>
 
                 <nav className="flex-1 p-4 space-y-2">
@@ -89,7 +97,7 @@ const Layout = ({ children }) => {
                     </div>
                     <Button variant="ghost" onClick={handleLogout} className="w-full justify-start text-gray-500 hover:text-red-600">
                         <LogOut className="w-4 h-4 mr-2" />
-                        Logout
+                        {t('common.logout', "Logout")}
                     </Button>
                 </div>
             </aside>
@@ -146,7 +154,7 @@ const Layout = ({ children }) => {
                                 <div className="p-4 border-t border-gray-100">
                                     <Button variant="ghost" onClick={handleLogout} className="w-full justify-start text-red-600 hover:bg-red-50">
                                         <LogOut className="w-4 h-4 mr-2" />
-                                        Logout
+                                        {t('common.logout', "Logout")}
                                     </Button>
                                 </div>
                             </motion.div>

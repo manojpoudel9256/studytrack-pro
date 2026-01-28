@@ -1,0 +1,139 @@
+{
+    "common": {
+        "dashboard": "ダッシュボード",
+        "settings": "設定",
+        "profile": "プロフィール",
+        "logout": "ログアウト",
+        "loading": "読み込み中...",
+        "save": "保存",
+        "cancel": "キャンセル",
+        "delete": "削除",
+        "edit": "編集",
+        "language": "言語",
+        "english": "英語",
+        "japanese": "日本語",
+        "deleteConfirm": "本当にこの記録を削除しますか？"
+    },
+    "dashboard": {
+        "title": "ダッシュボード",
+        "welcome": "おかえりなさい！学習の概要です。",
+        "totalHours": "総学習時間",
+        "activeDays": "活動日数",
+        "focusGoal": "集中目標",
+        "currentLevel": "現在のレベル",
+        "recentActivity": "最近のアクティビティ",
+        "noRecords": "記録が見つかりません。最初のセッションを開始しましょう！",
+        "lifetime": "合計",
+        "totalDaysStudied": "学習した合計日数",
+        "dailyCompletion": "日々の達成率",
+        "top10": "上位 10%",
+        "last5Records": "過去5件の記録"
+    },
+    "sidebar": {
+        "dashboard": "ダッシュボード",
+        "focusTimer": "集中タイマー",
+        "addSession": "セッション追加",
+        "history": "履歴",
+        "chartAnalysis": "チャート分析",
+        "leaderboard": "リーダーボード",
+        "profile": "プロフィール",
+        "settings": "設定"
+    },
+    "languageSelection": {
+        "title": "言語を選択",
+        "description": "続けるには言語を選択してください。",
+        "continue": "次へ"
+    },
+    "analytics": {
+        "title": "集中セッション",
+        "description": "気を散らすものを排除し、学習時間を記録しましょう。"
+    },
+    "addRecord": {
+        "title": "新しい記録を追加",
+        "description": "学習セッションを手動で履歴に記録します。",
+        "sessionDetails": "セッション詳細",
+        "subject": "件名",
+        "subjectPlaceholder": "何を勉強しましたか？",
+        "category": "カテゴリ",
+        "categoryPlaceholder": "トピック (例: 数学、プログラミング)",
+        "duration": "期間（分）",
+        "durationPlaceholder": "60",
+        "date": "日付",
+        "save": "記録を保存",
+        "saving": "保存中..."
+    },
+    "history": {
+        "title": "学習履歴",
+        "description": "すべての学習セッションの完全なログ。",
+        "recordsCount": "{{count}} 件の記録",
+        "noRecords": "記録が見つかりません。"
+    },
+    "charts": {
+        "title": "チャート分析",
+        "description": "学習パターンを詳細に分析します。",
+        "weeklyActivity": "週間アクティビティ",
+        "subjectDistribution": "科目別分布"
+    },
+    "leaderboard": {
+        "title": "リーダーボード",
+        "description": "学習に熱心なトップ学生。",
+        "noRecords": "まだ記録がありません。最初の一人になりましょう！",
+        "totalScore": "合計スコア"
+    },
+    "profile": {
+        "title": "マイプロフィール",
+        "editProfile": "プロフィール編集",
+        "plan": "学生 • フリープラン",
+        "email": "メールアドレス",
+        "joined": "登録日",
+        "fullName": "氏名",
+        "emailAddress": "メールアドレス",
+        "newPassword": "新しいパスワード (任意)",
+        "passwordPlaceholder": "変更しない場合は空欄のままにしてください",
+        "passwordHelp": "パスワードを変更する場合のみ入力してください。",
+        "saveChanges": "変更を保存"
+    },
+    "timer": {
+        "enterSubject": "集中する科目・内容を入力してください。",
+        "discardConfirm": "1分未満のセッションです。破棄しますか？",
+        "complete": "セッション完了！",
+        "excellent": "素晴らしい集中力でした。",
+        "ready": "準備はいいですか？",
+        "track": "時間を計測してXPを獲得しましょう。",
+        "subject": "学習内容",
+        "subjectPlaceholder": "何に取り組みますか？",
+        "category": "カテゴリ",
+        "start": "セッション開始",
+        "end": "セッション終了",
+        "categories": {
+            "General": "一般",
+            "Coding": "プログラミング",
+            "Math": "数学",
+            "Reading": "読書",
+            "Science": "科学",
+            "Writing": "執筆"
+        }
+    },
+    "auth": {
+        "loginTitle": "アカウントにサインイン",
+        "loginSubtitle": "StudyTrack Proへようこそ",
+        "registerTitle": "アカウントを作成",
+        "registerSubtitle": "アカウントにサインイン",
+        "or": "または",
+        "noAccount": "アカウントをお持ちでないですか？",
+        "registerHere": "こちらから登録",
+        "email": "メールアドレス",
+        "emailPlaceholder": "メールアドレスを入力",
+        "password": "パスワード",
+        "passwordPlaceholder": "パスワードを入力",
+        "passwordPlaceholderConfirm": "••••••••",
+        "fullName": "氏名",
+        "fullNamePlaceholder": "山田 太郎",
+        "profilePicture": "プロフィール画像 (任意)",
+        "uploadFile": "ファイルをアップロード",
+        "fileHelp": "PNG, JPG, GIF 最大5MB",
+        "signIn": "サインイン",
+        "signingIn": "サインイン中...",
+        "createAccount": "アカウント作成"
+    }
+}

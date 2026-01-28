@@ -5,9 +5,12 @@ import { motion } from "framer-motion";
 import { getRecords, deleteRecord } from "../api/api";
 import StatsCard from "../components/StatsCard";
 import Layout from "../components/Layout";
+import QuoteWidget from "../components/QuoteWidget";
 import { BookOpen, Calendar, Zap, Award, Target, Trash2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 function Dashboard() {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [records, setRecords] = useState([]);
 
@@ -30,7 +33,7 @@ function Dashboard() {
     }, [navigate]);
 
     const handleDelete = async (id) => {
-        if (!confirm("Are you sure you want to delete this record?")) return;
+        if (!confirm(t('common.deleteConfirm', "Are you sure you want to delete this record?"))) return;
         try {
             await deleteRecord(id);
             loadRecords();
@@ -54,9 +57,14 @@ function Dashboard() {
     return (
         <Layout>
             <div className="space-y-8">
-                <div>
-                    <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-                    <p className="text-gray-500">Welcome back! Here's your study overview.</p>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div className="lg:col-span-2">
+                        <h1 className="text-2xl font-bold text-gray-900">{t('dashboard.title', 'Dashboard')}</h1>
+                        <p className="text-gray-500">{t('dashboard.welcome', "Welcome back! Here's your study overview.")}</p>
+                    </div>
+                    <div className="lg:col-span-1">
+                        <QuoteWidget />
+                    </div>
                 </div>
 
                 {/* Stats Row */}
@@ -66,45 +74,45 @@ function Dashboard() {
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
                 >
                     <StatsCard
-                        title="Total Study Hours"
+                        title={t('dashboard.totalHours', 'Total Study Hours')}
                         value={stats.totalHours}
-                        subtext="Lifetime"
+                        subtext={t('dashboard.lifetime', 'Lifetime')}
                         icon={BookOpen}
                         color="indigo"
                     />
                     <StatsCard
-                        title="Active Days"
+                        title={t('dashboard.activeDays', 'Active Days')}
                         value={stats.activeDays}
-                        subtext="Total days studied"
+                        subtext={t('dashboard.totalDaysStudied', 'Total days studied')}
                         icon={Calendar}
                         color="blue"
                     />
                     <StatsCard
-                        title="Focus Goal"
+                        title={t('dashboard.focusGoal', 'Focus Goal')}
                         value="85%"
-                        subtext="Daily completion"
+                        subtext={t('dashboard.dailyCompletion', 'Daily completion')}
                         icon={Target}
                         color="green"
                     />
                     <StatsCard
-                        title="Current Level"
+                        title={t('dashboard.currentLevel', 'Current Level')}
                         value="Scholar"
-                        subtext="Top 10%"
+                        subtext={t('dashboard.top10', 'Top 10%')}
                         icon={Award}
-                        color="orange"
+                        color="gold" // Using new custom gold color
                     />
                 </motion.div>
 
                 {/* Recent History Snippet */}
                 <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                     <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
-                        <h3 className="text-lg font-semibold text-gray-900">Recent Activity</h3>
-                        <span className="text-sm text-gray-500">Last 5 records</span>
+                        <h3 className="text-lg font-semibold text-gray-900">{t('dashboard.recentActivity', 'Recent Activity')}</h3>
+                        <span className="text-sm text-gray-500">{t('dashboard.last5Records', 'Last 5 records')}</span>
                     </div>
 
                     {records.length === 0 ? (
                         <div className="p-12 text-center text-gray-500">
-                            No records found. Start your first session!
+                            {t('dashboard.noRecords', 'No records found. Start your first session!')}
                         </div>
                     ) : (
                         <div className="divide-y divide-gray-100">

@@ -5,8 +5,10 @@ import Layout from "../components/Layout";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import { Plus } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 function AddRecord() {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("");
@@ -37,41 +39,41 @@ function AddRecord() {
         <Layout>
             <div className="max-w-2xl mx-auto space-y-6">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-900">Add New Record</h1>
-                    <p className="text-gray-500">Manually log a study session to your history.</p>
+                    <h1 className="text-2xl font-bold text-gray-900">{t('addRecord.title', 'Add New Record')}</h1>
+                    <p className="text-gray-500">{t('addRecord.description', 'Manually log a study session to your history.')}</p>
                 </div>
 
                 <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                         <Plus className="w-5 h-5 text-indigo-600" />
-                        Session Details
+                        {t('addRecord.sessionDetails', 'Session Details')}
                     </h3>
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <Input
-                            label="Subject"
-                            placeholder="What did you study?"
+                            label={t('addRecord.subject', 'Subject')}
+                            placeholder={t('addRecord.subjectPlaceholder', 'What did you study?')}
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             required
                         />
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Input
-                                label="Category"
-                                placeholder="Topic (e.g. Math, Coding)"
+                                label={t('addRecord.category', 'Category')}
+                                placeholder={t('addRecord.categoryPlaceholder', 'Topic (e.g. Math, Coding)')}
                                 value={category}
                                 onChange={(e) => setCategory(e.target.value)}
                             />
                             <Input
-                                label="Duration (Minutes)"
+                                label={t('addRecord.duration', 'Duration (Minutes)')}
                                 type="number"
-                                placeholder="60"
+                                placeholder={t('addRecord.durationPlaceholder', '60')}
                                 value={duration}
                                 onChange={(e) => setDuration(e.target.value)}
                                 required
                             />
                         </div>
                         <Input
-                            label="Date"
+                            label={t('addRecord.date', 'Date')}
                             type="date"
                             value={recordDate}
                             onChange={(e) => setRecordDate(e.target.value)}
@@ -79,7 +81,7 @@ function AddRecord() {
                         />
                         <div className="pt-4">
                             <Button type="submit" disabled={loading} className="w-full md:w-auto md:px-8">
-                                {loading ? "Saving..." : "Save Record"}
+                                {loading ? t('addRecord.saving', 'Saving...') : t('addRecord.save', 'Save Record')}
                             </Button>
                         </div>
                     </form>

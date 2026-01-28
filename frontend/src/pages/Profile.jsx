@@ -4,8 +4,10 @@ import Layout from "../components/Layout";
 import { User, Mail, Calendar, Camera, X, Edit2, Check, Lock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 function Profile() {
+    const { t } = useTranslation();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [uploading, setUploading] = useState(false);
@@ -101,13 +103,13 @@ function Profile() {
                 <div className="flex justify-between items-center mb-6">
                     <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
                         <User className="w-8 h-8 text-indigo-600" />
-                        My Profile
+                        {t('profile.title', 'My Profile')}
                     </h1>
                     <button
                         onClick={() => setIsEditing(true)}
                         className="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition"
                     >
-                        <Edit2 className="w-4 h-4" /> Edit Profile
+                        <Edit2 className="w-4 h-4" /> {t('profile.editProfile', 'Edit Profile')}
                     </button>
                 </div>
 
@@ -143,7 +145,7 @@ function Profile() {
                         <div className="space-y-6">
                             <div>
                                 <h2 className="text-2xl font-bold text-gray-900">{user?.name}</h2>
-                                <p className="text-gray-500">Student • Free Plan</p>
+                                <p className="text-gray-500">{t('profile.plan', 'Student • Free Plan')}</p>
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-gray-100">
@@ -152,7 +154,7 @@ function Profile() {
                                         <Mail className="w-5 h-5 text-gray-500" />
                                     </div>
                                     <div>
-                                        <p className="text-xs text-gray-500 font-medium uppercase">Email</p>
+                                        <p className="text-xs text-gray-500 font-medium uppercase">{t('profile.email', 'Email')}</p>
                                         <p className="font-medium">{user?.email}</p>
                                     </div>
                                 </div>
@@ -161,7 +163,7 @@ function Profile() {
                                         <Calendar className="w-5 h-5 text-gray-500" />
                                     </div>
                                     <div>
-                                        <p className="text-xs text-gray-500 font-medium uppercase">Joined</p>
+                                        <p className="text-xs text-gray-500 font-medium uppercase">{t('profile.joined', 'Joined')}</p>
                                         <p className="font-medium">{new Date(user?.created_at).toLocaleDateString()}</p>
                                     </div>
                                 </div>
@@ -194,12 +196,12 @@ function Profile() {
 
                                 <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                                     <Edit2 className="w-5 h-5 text-indigo-600" />
-                                    Edit Profile
+                                    {t('profile.editProfile', 'Edit Profile')}
                                 </h2>
 
                                 <form onSubmit={handleUpdateProfile} className="space-y-4">
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">{t('profile.fullName', 'Full Name')}</label>
                                         <div className="relative">
                                             <User className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" />
                                             <input
@@ -213,7 +215,7 @@ function Profile() {
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">{t('profile.emailAddress', 'Email Address')}</label>
                                         <div className="relative">
                                             <Mail className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" />
                                             <input
@@ -227,18 +229,18 @@ function Profile() {
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">New Password (Optional)</label>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">{t('profile.newPassword', 'New Password (Optional)')}</label>
                                         <div className="relative">
                                             <Lock className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" />
                                             <input
                                                 type="password"
-                                                placeholder="Leave blank to keep current"
+                                                placeholder={t('profile.passwordPlaceholder', 'Leave blank to keep current')}
                                                 value={formData.password}
                                                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                                 className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
                                             />
                                         </div>
-                                        <p className="text-xs text-gray-500 mt-1">Only enter a password if you want to change it.</p>
+                                        <p className="text-xs text-gray-500 mt-1">{t('profile.passwordHelp', 'Only enter a password if you want to change it.')}</p>
                                     </div>
 
                                     <button
@@ -250,7 +252,7 @@ function Profile() {
                                             <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
                                         ) : (
                                             <>
-                                                <Check className="w-5 h-5" /> Save Changes
+                                                <Check className="w-5 h-5" /> {t('profile.saveChanges', 'Save Changes')}
                                             </>
                                         )}
                                     </button>

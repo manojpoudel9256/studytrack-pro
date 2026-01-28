@@ -28,10 +28,14 @@ const Settings = () => {
                     <div className="p-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <button
-                                onClick={() => changeLanguage('en')}
+                                type="button"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    changeLanguage('en');
+                                }}
                                 className={`p-4 rounded-xl border-2 text-left transition-all ${i18n.language === 'en'
-                                        ? 'border-indigo-600 bg-indigo-50'
-                                        : 'border-gray-200 hover:border-indigo-200 hover:bg-gray-50'
+                                    ? 'border-indigo-600 bg-indigo-50'
+                                    : 'border-gray-200 hover:border-indigo-200 hover:bg-gray-50'
                                     }`}
                             >
                                 <div className="flex justify-between items-center">
@@ -41,10 +45,14 @@ const Settings = () => {
                             </button>
 
                             <button
-                                onClick={() => changeLanguage('ja')}
+                                type="button"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    changeLanguage('ja');
+                                }}
                                 className={`p-4 rounded-xl border-2 text-left transition-all ${i18n.language === 'ja' || i18n.language.startsWith('ja')
-                                        ? 'border-indigo-600 bg-indigo-50'
-                                        : 'border-gray-200 hover:border-indigo-200 hover:bg-gray-50'
+                                    ? 'border-indigo-600 bg-indigo-50'
+                                    : 'border-gray-200 hover:border-indigo-200 hover:bg-gray-50'
                                     }`}
                             >
                                 <div className="flex justify-between items-center">

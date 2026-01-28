@@ -6,26 +6,18 @@ import en from './locales/en/translation.json';
 import ja from './locales/ja/translation.json';
 
 i18n
-    .use(LanguageDetector)
+    // .use(LanguageDetector) // Temporarily disabled
     .use(initReactI18next)
     .init({
         resources: {
-            en: {
-                translation: en
-            },
-            ja: {
-                translation: ja
-            }
+            en: { translation: en },
+            ja: { translation: ja }
         },
+        lng: localStorage.getItem('i18nextLng') || 'en', // Manual load
         fallbackLng: 'en',
         debug: true,
         interpolation: {
-            escapeValue: false // React already escapes by default
-        },
-        detection: {
-            order: ['localStorage', 'navigator'],
-            caches: ['localStorage'],
-            lookupLocalStorage: 'i18nextLng'
+            escapeValue: false
         }
     });
 

@@ -103,6 +103,15 @@ Authorization: Bearer JWT_TOKEN
 }
 ```
 
+
+### 5. Update Record
+- **Endpoint**: `/records/:id`
+- **Method**: PUT
+- **Description**: Update an existing record
+
+**Request Body**
+```json
+{
   "title": "string",
   "category": "string",
   "duration": number,

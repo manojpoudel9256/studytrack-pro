@@ -142,6 +142,24 @@ Authorization: Bearer JWT_TOKEN
 }
 ```
 
+### 8. Get Weather
+- **Endpoint**: `/weather`
+- **Method**: GET
+- **Description**: Fetch real-time weather data for the dashboard.
+- **Query Parameters**:
+  - `city`: City name (default: "Tokyo")
+  - `lang`: Language code (`en` or `ja`)
+
+**Response (200)**
+```json
+{
+  "temp": 15,
+  "condition": "Sunny",
+  "location": "Tokyo",
+  "loading": false
+}
+```
+
 ## External APIs (Frontend)
 
 ### 1. ZenQuotes API (Motivational Quotes)

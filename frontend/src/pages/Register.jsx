@@ -33,7 +33,7 @@ const Register = () => {
                 data.append("profile_picture", file);
             }
 
-            await axios.post("http://localhost:5000/api/auth/register", data, {
+            await axios.post("http://localhost:3001/api/auth/register", data, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 }
@@ -101,6 +101,7 @@ const Register = () => {
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                             required
+                            maxLength={30}
                         />
 
                         <Input
@@ -111,6 +112,7 @@ const Register = () => {
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             required
+                            maxLength={50}
                         />
 
                         <Input
@@ -121,6 +123,7 @@ const Register = () => {
                             value={formData.password}
                             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                             required
+                            maxLength={30}
                         />
 
                         <div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Play, Pause, StopCircle, Award, Timer, Tag, Type } from "lucide-react";
+import { Play, Pause, StopCircle, Award, Timer, Tag, Type, X, Plus, Pencil, Check, MinusCircle, Trash2 } from "lucide-react";
 import Button from "./Button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTimer } from "../context/TimerContext";
@@ -24,6 +24,37 @@ const StudyTimer = ({ onSave }) => {
 
     const [showXP, setShowXP] = useState(false);
     const [xpEarned, setXpEarned] = useState(0);
+
+    // Category State
+    const [categories, setCategories] = useState(() => {
+        const saved = localStorage.getItem("study_categories");
+        return saved ? JSON.parse(saved) : ["General", "Coding", "Math", "Reading", "Science", "Writing"];
+    });
+    const [isAddingCategory, setIsAddingCategory] = useState(false);
+    const [isManaging, setIsManaging] = useState(false);
+    const [newCategoryName, setNewCategoryName] = useState("");
+
+    const handleAddCategory = () => {
+        if (!newCategoryName.trim()) return;
+        const updated = [...categories, newCategoryName.trim()];
+        setCategories(updated);
+        localStorage.setItem("study_categories", JSON.stringify(updated));
+        setCategory(newCategoryName.trim());
+        setNewCategoryName("");
+        setIsAddingCategory(false);
+    };
+
+    const handleDeleteCategory = (catToDelete, e) => {
+        e.stopPropagation();
+        if (confirm(t('timer.deleteCategoryConfirm', `Delete category "${catToDelete}"?`))) {
+            const updated = categories.filter(c => c !== catToDelete);
+            setCategories(updated);
+            localStorage.setItem("study_categories", JSON.stringify(updated));
+            if (category === catToDelete) {
+                setCategory(updated[0] || "");
+            }
+        }
+    };
 
     const formatTime = (totalSeconds) => {
         const h = Math.floor(totalSeconds / 3600);
@@ -163,25 +194,85 @@ const StudyTimer = ({ onSave }) => {
                     </div>
 
                     <div className="group/input">
-                        <label className="flex items-center gap-2 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 group-focus-within/input:text-indigo-600 transition-colors">
-                            <Tag className="w-4 h-4" /> {t('timer.category', "Category")}
+                        <label className="flex items-center justify-between text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 group-focus-within/input:text-indigo-600 transition-colors">
+                            <div className="flex items-center gap-2">
+                                <Tag className="w-4 h-4" /> {t('timer.category', "Category")}
+                            </div>
+                            <button
+                                onClick={() => setIsManaging(!isManaging)}
+                                className={`flex items-center gap-1 text-[10px] px-2 py-1 rounded-full transition-colors ${isManaging ? 'bg-indigo-100 text-indigo-700 font-bold' : 'text-gray-400 hover:text-gray-600'}`}
+                            >
+                                {isManaging ? <Check className="w-3 h-3" /> : <Pencil className="w-3 h-3" />}
+                                {isManaging ? t('common.done', 'Done') : t('common.edit', 'Edit')}
+                            </button>
                         </label>
                         <div className="grid grid-cols-3 gap-2">
-                            {["General", "Coding", "Math", "Reading", "Science", "Writing"].map((cat) => (
+                            {categories.map((cat) => (
                                 <button
                                     key={cat}
-                                    onClick={() => setCategory(cat)}
-                                    className={`text-sm px-3 py-2 rounded-lg border transition-all ${category === cat
+                                    onClick={(e) => isManaging ? handleDeleteCategory(cat, e) : setCategory(cat)}
+                                    className={`relative text-sm px-3 py-2 rounded-lg border transition-all truncate flex items-center justify-between gap-2 ${category === cat && !isManaging
                                         ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white border-transparent shadow-md shadow-purple-200'
                                         : 'bg-white border-gray-200 text-gray-600 hover:border-indigo-200 hover:bg-gray-50'
-                                        }`}
+                                        } ${isManaging ? 'opacity-100 ring-2 ring-red-100 border-red-200 cursor-pointer bg-red-50/50' : ''}`}
+                                    title={isManaging ? t('common.delete', 'Delete') : cat}
                                 >
-                                    {t(`timer.categories.${cat}`, cat)}
+                                    <span className="truncate">{cat}</span>
+                                    {isManaging && <Trash2 className="w-3 h-3 text-red-500 flex-shrink-0" />}
                                 </button>
                             ))}
+                            {/* Add Category Button - Hide in Manage Mode */}
+                            {!isManaging && (
+                                <button
+                                    onClick={() => setIsAddingCategory(true)}
+                                    className="text-sm px-3 py-2 rounded-lg border-2 border-dashed border-gray-200 text-gray-400 hover:border-indigo-300 hover:text-indigo-500 hover:bg-indigo-50 transition-all flex items-center justify-center font-bold"
+                                    title="Add Category"
+                                >
+                                    <Plus className="w-4 h-4" />
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
+
+                {/* Add Category Modal */}
+                <AnimatePresence>
+                    {isAddingCategory && (
+                        <div className="absolute inset-0 z-50 flex items-center justify-center bg-white/80 backdrop-blur-sm p-4">
+                            <motion.div
+                                initial={{ scale: 0.9, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                exit={{ scale: 0.9, opacity: 0 }}
+                                className="bg-white w-full max-w-xs shadow-2xl rounded-2xl border border-gray-100 p-6"
+                            >
+                                <h4 className="text-lg font-bold text-gray-900 mb-4">{t('timer.addCategory', 'Add Category')}</h4>
+                                <input
+                                    autoFocus
+                                    className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 text-gray-900 mb-4 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                                    placeholder="Category Name"
+                                    value={newCategoryName}
+                                    onChange={(e) => setNewCategoryName(e.target.value)}
+                                    onKeyDown={(e) => e.key === 'Enter' && handleAddCategory()}
+                                />
+                                <div className="flex gap-2 justify-end">
+                                    <button
+                                        onClick={() => setIsAddingCategory(false)}
+                                        className="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700"
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        onClick={handleAddCategory}
+                                        disabled={!newCategoryName.trim()}
+                                        className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 disabled:opacity-50"
+                                    >
+                                        Add
+                                    </button>
+                                </div>
+                            </motion.div>
+                        </div>
+                    )}
+                </AnimatePresence>
 
                 <Button
                     onClick={handleStart}

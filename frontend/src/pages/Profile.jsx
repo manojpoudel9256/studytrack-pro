@@ -50,7 +50,7 @@ function Profile() {
 
         try {
             const token = localStorage.getItem("token");
-            await axios.post("http://localhost:5000/api/auth/upload-avatar", formData, {
+            await axios.post("http://localhost:3001/api/auth/upload-avatar", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     "Authorization": `Bearer ${token}`
@@ -70,7 +70,7 @@ function Profile() {
         setIsSaving(true);
         try {
             const token = localStorage.getItem("token");
-            await axios.put("http://localhost:5000/api/auth/update", formData, {
+            await axios.put("http://localhost:3001/api/auth/update", formData, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
@@ -125,7 +125,7 @@ function Profile() {
                                 >
                                     {user?.profile_picture ? (
                                         <img
-                                            src={`http://localhost:5000${user.profile_picture}`}
+                                            src={`http://localhost:3001${user.profile_picture}`}
                                             alt="Profile"
                                             className="w-full h-full object-cover"
                                         />
@@ -286,7 +286,7 @@ function Profile() {
                                     <X className="w-5 h-5" />
                                 </button>
                                 <img
-                                    src={`http://localhost:5000${selectedImage}`}
+                                    src={`http://localhost:3001${selectedImage}`}
                                     alt="Full Size"
                                     className="w-full h-auto max-h-[80vh] object-contain bg-gray-100"
                                 />

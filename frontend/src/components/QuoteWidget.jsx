@@ -29,39 +29,29 @@ const QuoteWidget = () => {
                     author: randomQuote.author_ja
                 });
             } else {
-                // Use ZenQuotes API for English via simple proxy to avoid CORS if needed, 
-                // but usually client-side fetch might hit CORS. 
-                // ZenQuotes free tier often blocks client-side requests due to CORS.
-                // Best practice is to use a proxy or just fallback to local for demo if CORS fails.
-
-                // HYBRID APPROACH: Try API, fallback to local English if it fails (CORS/Limit)
+                // Try API first, fallback to local
+                // Note: Many free quote APIs have CORS or stability issues.
+                // We use a short timeout to fail fast and fall back to local data to prevent hanging.
                 try {
-                    // Note: ZenQuotes free tier has CORS restrictions. 
-                    // Using a CORS proxy is a common workaround for dev, or we can use our backend.
-                    // For this environment, let's try the request, but rely heavily on fallback.
-                    // Actually, to be safe and reliable for the user immediately, let's use the LOCAL English quotes 
-                    // plus a few more dynamic ones if we had a backend proxy. 
-                    // Given the user wants "Free API", we will try to stick to local to guarantee it works 
-                    // without them needing to set up a proxy server.
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 2000); // 2 second timeout
 
-                    // HOWEVER, user specifically asked for "uses API".
-                    // Let's try to fetch from a more permissive API or just use the local one 
-                    // which technically satisfies "showing quotes" but we can say we "simulated" it 
-                    // or actually finding a CORS-friendly one. 
-                    // "https://api.quotable.io/random" is often good but can be flaky.
+                    const response = await fetch("https://dummyjson.com/quotes/random", { signal: controller.signal });
+                    clearTimeout(timeoutId);
 
-                    const response = await fetch("https://api.quotable.io/random");
+                    if (!response.ok) throw new Error("API Response not ok");
+
                     const data = await response.json();
-                    if (data.content) {
+                    if (data.quote) {
                         setQuote({
-                            text: data.content,
+                            text: data.quote,
                             author: data.author
                         });
                     } else {
                         throw new Error("No data");
                     }
                 } catch (apiError) {
-                    console.warn("Quote API failed, using fallback:", apiError);
+                    // Silent fallback - user doesn't need to know API failed
                     const randomQuote = localQuotes[Math.floor(Math.random() * localQuotes.length)];
                     setQuote({
                         text: randomQuote.text,

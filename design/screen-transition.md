@@ -11,6 +11,7 @@ flowchart TD
     B --> D[Create Record Screen]
     B --> E[Record List Screen]
     B --> G[Settings Screen]
+    B --> H[Chart Analysis Screen]
 
     D -->|Save Record| B
     E -->|Edit Record| F[Edit Record Screen]

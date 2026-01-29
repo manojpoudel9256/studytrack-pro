@@ -13,8 +13,13 @@ StudyTrack Pro is a modern, full-stack web application designed to help students
 
 ### 📊 Dashboard & Analytics
 - **Visual Analytics**: Interactive bar and pie charts to visualize study trends.
+- **Enhanced Chart UI**: Responsive charts with a split-view Subject Distribution list for better readability.
 - **Stats Overview**: Quick summary of total hours, tasks completed, and current streak.
 - **Activity History**: Detailed log of all study sessions with filtering options.
+
+### 🌦️ Immersive Weather Experience
+- **Dynamic Backgrounds**: The application atmosphere adapts to real-time weather conditions (Sunny ☀️, Rainy 🌧️, Snowy ❄️).
+- **Live Widget**: Dashboard displays current weather, temperature, and location.
 
 ### ⏱️ Focus Tools
 - **Built-in Timer**: A dedicated focus timer to track live study sessions.
@@ -37,7 +42,7 @@ StudyTrack Pro is a modern, full-stack web application designed to help students
 
 ### ✨ "Golden Light" Theme & UI
 - **Premium Aesthetic**: A warm, prestigious **Golden/Amber** theme with a soft cream background.
-- **Live Backgrounds**: Login & Register pages feature a **dynamic, moving gradient** with floating geometric particles.
+- **Animated Experience**: Login & Register pages feature a **dynamic, moving gradient** with floating geometric particles.
 - **Modern Interactions**: Buttons feature a stylish **Blue-Purple** gradient for high contrast and modern feel.
 
 ### 💬 Motivational Quotes

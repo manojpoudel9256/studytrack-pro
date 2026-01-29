@@ -15,7 +15,7 @@ i18n
         },
         lng: localStorage.getItem('i18nextLng') || 'en', // Manual load
         fallbackLng: 'en',
-        debug: true,
+        debug: false,
         interpolation: {
             escapeValue: false
         }

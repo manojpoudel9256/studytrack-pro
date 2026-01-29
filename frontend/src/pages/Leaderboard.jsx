@@ -87,7 +87,7 @@ function Leaderboard() {
                                         onClick={() => user.profile_picture && setSelectedImage(user.profile_picture)}
                                     >
                                         {user.profile_picture ? (
-                                            <img src={`http://localhost:5000${user.profile_picture}`} alt={user.name} className="w-full h-full object-cover" />
+                                            <img src={`http://localhost:3001${user.profile_picture}`} alt={user.name} className="w-full h-full object-cover" />
                                         ) : (
                                             user.name[0].toUpperCase()
                                         )}
@@ -138,7 +138,7 @@ function Leaderboard() {
                                     <X className="w-5 h-5" />
                                 </button>
                                 <img
-                                    src={`http://localhost:5000${selectedImage}`}
+                                    src={`http://localhost:3001${selectedImage}`}
                                     alt="Full Size"
                                     className="w-full h-auto max-h-[80vh] object-contain bg-gray-100"
                                 />

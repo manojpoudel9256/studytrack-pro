@@ -6,13 +6,16 @@ import { getRecords, deleteRecord } from "../api/api";
 import StatsCard from "../components/StatsCard";
 import Layout from "../components/Layout";
 import QuoteWidget from "../components/QuoteWidget";
+import WeatherWidget from "../components/WeatherWidget";
+import WeatherBackground from "../components/WeatherBackground";
 import { BookOpen, Calendar, Zap, Award, Target, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 function Dashboard() {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const navigate = useNavigate();
     const [records, setRecords] = useState([]);
+    const [weatherCondition, setWeatherCondition] = useState("default");
 
     const loadRecords = () => {
         getRecords().then(setRecords).catch(err => {
@@ -55,12 +58,25 @@ function Dashboard() {
     }, [records]);
 
     return (
-        <Layout>
-            <div className="space-y-8">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <div className="lg:col-span-2">
-                        <h1 className="text-2xl font-bold text-gray-900">{t('dashboard.title', 'Dashboard')}</h1>
-                        <p className="text-gray-500">{t('dashboard.welcome', "Welcome back! Here's your study overview.")}</p>
+        <Layout transparentMain={true}>
+            <WeatherBackground condition={weatherCondition} />
+            <div className="space-y-8 relative z-10">
+                {/* Top Section: Welcome & Widgets */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    {/* Welcome Section */}
+                    <div className="lg:col-span-1 flex flex-col justify-center space-y-2 p-2">
+                        <h1 className="text-3xl font-bold text-gray-900 tracking-tight">{t('dashboard.title', 'Dashboard')}</h1>
+                        <p className="text-gray-500 text-lg">{t('dashboard.welcome', "Welcome back! Here's your study overview.")}</p>
+                        <div className="pt-4">
+                            <p className="text-sm font-medium text-indigo-600 bg-indigo-50 inline-block px-3 py-1 rounded-full">
+                                {new Date().toLocaleDateString(i18n.language, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Widgets in Top Row */}
+                    <div className="lg:col-span-1">
+                        <WeatherWidget onWeatherChange={setWeatherCondition} />
                     </div>
                     <div className="lg:col-span-1">
                         <QuoteWidget />

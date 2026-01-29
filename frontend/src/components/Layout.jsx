@@ -20,7 +20,7 @@ const SidebarLink = ({ to, icon: Icon, label, active, onClick }) => (
     </Link>
 );
 
-const Layout = ({ children }) => {
+const Layout = ({ children, transparentMain = false }) => {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const location = useLocation();
@@ -54,7 +54,7 @@ const Layout = ({ children }) => {
     ];
 
     return (
-        <div className="min-h-screen bg-gray-50 flex">
+        <div className="min-h-screen flex">
             {/* Desktop Sidebar */}
             <aside className="hidden md:flex flex-col w-64 bg-white border-r border-gray-200 h-screen sticky top-0">
                 <div className="flex items-center gap-3 px-2">
@@ -85,7 +85,7 @@ const Layout = ({ children }) => {
                     <div className="flex items-center gap-3 px-4 py-3 mb-2">
                         <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold overflow-hidden border border-indigo-200">
                             {user?.profile_picture ? (
-                                <img src={`http://localhost:5000${user.profile_picture}`} alt="Profile" className="w-full h-full object-cover" />
+                                <img src={`http://localhost:3001${user.profile_picture}`} alt="Profile" className="w-full h-full object-cover" />
                             ) : (
                                 user?.name?.[0] || "U"
                             )}
@@ -163,7 +163,7 @@ const Layout = ({ children }) => {
                 </AnimatePresence>
 
                 {/* Main Content */}
-                <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
+                <main className={`flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto ${transparentMain ? 'bg-transparent' : 'bg-gray-50'}`}>
                     {children}
                 </main>
             </div>

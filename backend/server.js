@@ -7,6 +7,7 @@ require("./db");
 
 const authRoutes = require("./routes/auth.routes");
 const recordRoutes = require("./routes/record.routes");
+const weatherRoutes = require("./routes/weather.routes");
 
 
 const app = express();
@@ -17,6 +18,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/records", recordRoutes);
+app.use("/api/weather", weatherRoutes);
 
 app.get("/", (req, res) => {
     res.send("StudyTrack Pro API is running");

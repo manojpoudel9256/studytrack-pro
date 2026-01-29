@@ -56,7 +56,9 @@ function ChartAnalysis() {
             const cat = r.category || "Other";
             catMap[cat] = (catMap[cat] || 0) + r.duration;
         });
-        const categoryData = Object.entries(catMap).map(([name, value]) => ({ name, value }));
+        const categoryData = Object.entries(catMap)
+            .sort(([, a], [, b]) => b - a)
+            .map(([name, value]) => ({ name, value }));
 
         return { weeklyData, categoryData };
     }, [records]);

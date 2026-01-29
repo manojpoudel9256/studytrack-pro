@@ -103,6 +103,9 @@
         "subject": "学習内容",
         "subjectPlaceholder": "何に取り組みますか？",
         "category": "カテゴリ",
+        "addCategory": "カテゴリを追加",
+        "categoryNamePlaceholder": "カテゴリ名",
+        "add": "追加",
         "start": "セッション開始",
         "end": "セッション終了",
         "categories": {

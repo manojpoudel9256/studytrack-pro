@@ -131,7 +131,7 @@ const StudyTimer = ({ onSave }) => {
                     <div className="text-center space-y-1">
                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-800/80 backdrop-blur rounded-full border border-slate-700">
                             <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
-                            <span className="text-xs font-medium text-indigo-300 uppercase tracking-wider">{category}</span>
+                            <span className="text-xs font-medium text-indigo-300 uppercase tracking-wider">{t(`timer.categories.${category}`, category)}</span>
                         </div>
                         <h3 className="text-xl font-semibold text-white truncate max-w-[200px] mx-auto">{subject}</h3>
                     </div>
@@ -194,32 +194,45 @@ const StudyTimer = ({ onSave }) => {
                     </div>
 
                     <div className="group/input">
-                        <label className="flex items-center justify-between text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 group-focus-within/input:text-indigo-600 transition-colors">
-                            <div className="flex items-center gap-2">
+                        <div className="flex items-center justify-between mb-2">
+                            <label className="flex items-center gap-2 text-xs font-semibold text-gray-500 uppercase tracking-wider group-focus-within/input:text-indigo-600 transition-colors">
                                 <Tag className="w-4 h-4" /> {t('timer.category', "Category")}
-                            </div>
+                            </label>
                             <button
-                                onClick={() => setIsManaging(!isManaging)}
+                                onClick={(e) => {
+                                    e.preventDefault(); // Prevent any form submission or label bubbling
+                                    setIsManaging(!isManaging);
+                                }}
                                 className={`flex items-center gap-1 text-[10px] px-2 py-1 rounded-full transition-colors ${isManaging ? 'bg-indigo-100 text-indigo-700 font-bold' : 'text-gray-400 hover:text-gray-600'}`}
                             >
                                 {isManaging ? <Check className="w-3 h-3" /> : <Pencil className="w-3 h-3" />}
                                 {isManaging ? t('common.done', 'Done') : t('common.edit', 'Edit')}
                             </button>
-                        </label>
+                        </div>
                         <div className="grid grid-cols-3 gap-2">
                             {categories.map((cat) => (
-                                <button
+                                <div
                                     key={cat}
-                                    onClick={(e) => isManaging ? handleDeleteCategory(cat, e) : setCategory(cat)}
-                                    className={`relative text-sm px-3 py-2 rounded-lg border transition-all truncate flex items-center justify-between gap-2 ${category === cat && !isManaging
+                                    onClick={() => !isManaging && setCategory(cat)}
+                                    className={`relative text-sm px-3 py-2 rounded-lg border transition-all truncate flex items-center justify-between gap-2 select-none ${category === cat && !isManaging
                                         ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white border-transparent shadow-md shadow-purple-200'
-                                        : 'bg-white border-gray-200 text-gray-600 hover:border-indigo-200 hover:bg-gray-50'
-                                        } ${isManaging ? 'opacity-100 ring-2 ring-red-100 border-red-200 cursor-pointer bg-red-50/50' : ''}`}
-                                    title={isManaging ? t('common.delete', 'Delete') : cat}
+                                        : 'bg-white border-gray-200 text-gray-600'
+                                        } ${!isManaging ? 'hover:border-indigo-200 hover:bg-gray-50 cursor-pointer' : ''} ${isManaging ? 'ring-1 ring-red-100 border-red-200 bg-red-50/10' : ''}`}
                                 >
-                                    <span className="truncate">{cat}</span>
-                                    {isManaging && <Trash2 className="w-3 h-3 text-red-500 flex-shrink-0" />}
-                                </button>
+                                    <span className={`truncate ${isManaging ? 'text-gray-400' : ''}`}>{t(`timer.categories.${cat}`, cat)}</span>
+                                    {isManaging && (
+                                        <button
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleDeleteCategory(cat, e);
+                                            }}
+                                            className="p-1 -mr-1 rounded-full hover:bg-red-100 text-red-400 hover:text-red-500 transition-colors z-10"
+                                            title={t('common.delete', 'Delete')}
+                                        >
+                                            <Trash2 className="w-3.5 h-3.5" />
+                                        </button>
+                                    )}
+                                </div>
                             ))}
                             {/* Add Category Button - Hide in Manage Mode */}
                             {!isManaging && (
@@ -249,7 +262,7 @@ const StudyTimer = ({ onSave }) => {
                                 <input
                                     autoFocus
                                     className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 text-gray-900 mb-4 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-                                    placeholder="Category Name"
+                                    placeholder={t('timer.categoryNamePlaceholder', "Category Name")}
                                     value={newCategoryName}
                                     onChange={(e) => setNewCategoryName(e.target.value)}
                                     onKeyDown={(e) => e.key === 'Enter' && handleAddCategory()}
@@ -259,14 +272,14 @@ const StudyTimer = ({ onSave }) => {
                                         onClick={() => setIsAddingCategory(false)}
                                         className="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700"
                                     >
-                                        Cancel
+                                        {t('common.cancel', 'Cancel')}
                                     </button>
                                     <button
                                         onClick={handleAddCategory}
                                         disabled={!newCategoryName.trim()}
                                         className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 disabled:opacity-50"
                                     >
-                                        Add
+                                        {t('timer.add', 'Add')}
                                     </button>
                                 </div>
                             </motion.div>

@@ -103,6 +103,9 @@
         "subject": "Subject",
         "subjectPlaceholder": "What are you working on?",
         "category": "Category",
+        "addCategory": "Add Category",
+        "categoryNamePlaceholder": "Category Name",
+        "add": "Add",
         "start": "Start Session",
         "end": "End Session",
         "categories": {
